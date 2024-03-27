@@ -20,7 +20,11 @@ public class SaveLoadController : MonoBehaviour
         if(instance!=null){
             Destroy(this);
         }
-        else instance=this;
+        else
+        {
+            instance=this;
+            DontDestroyOnLoad(this.gameObject);
+        } 
 
         path= Application.persistentDataPath +"save.json";
     }
