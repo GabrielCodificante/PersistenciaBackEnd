@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 cameraLook;
    
     private PlayerInputActions inputs;
-    private InputAction move, jump, teamSwap, fire, look; 
+    private InputAction move, jump, look, load, save; 
 
     public static PlayerController instance;
 
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
         inputs.Enable();
 
         jump.performed += characterMovement.Jump;
+        load.performed;
     }
 
     void OnDisable()
@@ -37,8 +38,9 @@ public class PlayerController : MonoBehaviour
 
         move = inputs.Player.Move;
         jump = inputs.Player.Jump;
-        teamSwap = inputs.Player.TeamSwap;
         look = inputs.Player.Look;
+        load = inputs.Player.Load;
+        save = inputs.Player.Save;
     }
 
     void Start(){
