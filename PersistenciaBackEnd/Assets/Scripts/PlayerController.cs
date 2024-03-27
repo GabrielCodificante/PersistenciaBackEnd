@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
         inputs.Enable();
 
         jump.performed += characterMovement.Jump;
-        load.performed;
+        load.performed += PlayerManager.instance.LoadPrefs;
+        save.performed += PlayerManager.instance.SavePrefs;
     }
 
     void OnDisable()
