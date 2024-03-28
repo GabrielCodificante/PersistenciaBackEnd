@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
@@ -11,5 +12,10 @@ public class Coin : MonoBehaviour
             PlayerManager.instance.Coins++;
             this.gameObject.SetActive(false);
         }
+    }
+
+    void Update()
+    {
+        this.gameObject.transform.position.y = Mathf.PingPong(0.5f,2);
     }
 }
