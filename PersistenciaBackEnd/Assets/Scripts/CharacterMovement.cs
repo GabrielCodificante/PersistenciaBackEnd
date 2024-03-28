@@ -27,7 +27,7 @@ public class CharacterMovement : MonoBehaviour
 
     [Header("AirMove")]
     [SerializeField] private float jumpHeight = 1.0f;
-    private float jumpSpeed => Mathf.Sqrt(2.0f * -Physics.gravity.y * jumpHeight);
+    private float jumpSpeed; 
     [SerializeField] private float airMaxSpeed = 4.0f; 
     [SerializeField] private float airAcceleration = 15.0f;
     [SerializeField] private float drag = 0.4f;
@@ -50,8 +50,8 @@ public class CharacterMovement : MonoBehaviour
     }
 
     void Movement(){
-        isGround = Physics.Raycast(this.transform.position, Vector3.down, raio, ground, QueryTriggerInteraction.Ignore);
-        Debug.DrawRay(this.transform.position, Vector3.down * raio, Color.green, 0);
+        isGround = Physics.Raycast(this.transform.position + new Vector3(0, 0.1f, 0), Vector3.down, raio, ground, QueryTriggerInteraction.Ignore);
+        Debug.DrawRay(this.transform.position + new Vector3(0, 0.1f, 0), Vector3.down * raio, Color.green, 0);
         
         if(isGround)
         {
@@ -84,7 +84,7 @@ public class CharacterMovement : MonoBehaviour
         if(isGround)
         {
             rg.AddForce(Vector3.up * jumpSpeed, ForceMode.VelocityChange);
-            //rg.velocity += new Vector3(0, jumpSpeed, 0);
+            Debug.Log("Pulei!");
         }
     }
 
@@ -101,7 +101,8 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         rg = this.transform.GetComponent<Rigidbody>();
-        Physics.gravity = new Vector3(0, Physics.gravity.y - (rg.mass / gravity), 0);        
+        Physics.gravity = new Vector3(0, Physics.gravity.y - (rg.mass / gravity), 0);
+        jumpSpeed = Mathf.Sqrt(2.0f * -Physics.gravity.y * jumpHeight);        
     }
     
 }
