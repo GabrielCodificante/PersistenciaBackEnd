@@ -19,13 +19,24 @@ public class PlayerController : MonoBehaviour
 
      #endregion
 
+     void Save(InputAction.CallbackContext call){
+        SaveLoadController.instance.Save();
+        PlayerManager.instance.SavePrefs();
+        
+     }
+
+     void Load(InputAction.CallbackContext call){
+        SaveLoadController.instance.Load();
+        PlayerManager.instance.LoadPrefs();
+     }
+
     void OnEnable()
     {
         inputs.Enable();
 
         jump.performed += characterMovement.Jump;
-        load.performed += PlayerManager.instance.LoadPrefs;
-        save.performed += PlayerManager.instance.SavePrefs;
+        load.performed += Load;
+        save.performed += Save;
     }
 
     void OnDisable()

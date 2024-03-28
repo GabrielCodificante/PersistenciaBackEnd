@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AdapterData 
+public class AdapterData : MonoBehaviour
 {
     /*Player Adapter*/
     public static void GetPlayer(PlayerData data, ref CharacterMovement player)
@@ -27,6 +27,13 @@ public class AdapterData
         block.transform.localScale = data.scale;
     }
 
+    public static void CreateBlock(GameObject prefab, BlockData data){
+        Block obj;
+        obj=Instantiate(prefab).GetComponent<Block>();
+        GetBlock(data, ref obj);
+        
+    }
+
     public static BlockData GetBlockData(Block block)
     {
         BlockData data = new BlockData();
@@ -37,11 +44,18 @@ public class AdapterData
     }
 
     /*Coin Adapter*/
-     public static void GetCoin(PlayerData data, ref Coin coin)
+    public static void GetCoin(CoinData data, ref Coin coin)
     {
         coin.transform.position = data.position;
     }
-    public  static CoinData GetCoin(Coin coin )
+
+    public static void CreateCoin(GameObject prefab, CoinData data){
+        Coin obj;
+        obj = Instantiate(prefab).GetComponent<Coin>();
+        GetCoin(data, ref obj);
+        
+    }
+    public  static CoinData GetCoinData(Coin coin )
     {
         CoinData data = new CoinData();
         data.position = coin.transform.position;

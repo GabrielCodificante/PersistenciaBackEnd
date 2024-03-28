@@ -12,12 +12,12 @@ public class PlayerManager : MonoBehaviour
         set => coins = value;
     }
 
-    public void LoadPrefs(InputAction.CallbackContext context)
+    public void LoadPrefs()
     {
         coins = PlayerPrefs.GetInt("coins");
     }
 
-    public void SavePrefs(InputAction.CallbackContext context)
+    public void SavePrefs()
     {
         PlayerPrefs.SetInt("coins", coins);
     }
