@@ -12,6 +12,7 @@ public class SaveLoadController : MonoBehaviour
 
     public GameObject block, coin;
     private string path;
+    public string pathName;
 
     #endregion
 
@@ -60,7 +61,7 @@ public class SaveLoadController : MonoBehaviour
         sceneData = JsonUtility.FromJson<SceneData>(json);
 
   
-        List<Coin> coins= new List<Coin>();
+        List<Coin> coins = new List<Coin>();
 
         foreach(BlockData block in sceneData.blocks)
         {
@@ -98,7 +99,7 @@ public class SaveLoadController : MonoBehaviour
 
     void Start()
     {
-        if(instance!=null){
+        if(instance != null){
             Destroy(this);
         }
         else
@@ -107,7 +108,7 @@ public class SaveLoadController : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         } 
 
-        path= Application.persistentDataPath +"save.json";
+        path = Application.persistentDataPath + "_" + pathName + ".json";
     }
 
 

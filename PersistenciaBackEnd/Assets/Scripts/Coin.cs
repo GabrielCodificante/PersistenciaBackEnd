@@ -16,6 +16,6 @@ public class Coin : MonoBehaviour
 
     void Update()
     {
-        this.gameObject.transform.position.y = Mathf.PingPong(0.5f,2);
+        //this.gameObject.transform.position.y = Mathf.PingPong(0.5f,2);
     }
 }
