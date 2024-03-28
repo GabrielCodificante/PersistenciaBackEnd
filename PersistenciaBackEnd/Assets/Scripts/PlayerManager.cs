@@ -1,15 +1,23 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System;
 
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
+    [SerializeField] Text coinsTxt;
     [SerializeField] private int coins; 
+
 
     public int Coins
     {
         get => coins;
-        set => coins = value;
+        set 
+        {
+            coins = value;
+            coinsTxt.text = string.Format("{0} / {1}",coins,coins); //coins.ToString() + " | 15";
+        } 
     }
 
     public void LoadPrefs()
@@ -27,5 +35,6 @@ public class PlayerManager : MonoBehaviour
         if(instance == null){
             instance = this;
         }
+        coinsTxt.text = string.Format("{0} / {1}",coins,coins);
     }
 }
