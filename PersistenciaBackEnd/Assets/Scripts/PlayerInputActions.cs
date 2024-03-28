@@ -71,6 +71,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LoadLevel1"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f93d374-b71d-4aaa-b2bd-c5adc3145663"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LoadLevel2"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d57049f-c504-40b5-b515-a118c95676e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +190,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Load"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84de3620-f0c3-4a9f-9454-00feb138808c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""LoadLevel1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7413182-4b4f-4a69-91c1-04bb0c343fc4"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""LoadLevel2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -191,6 +231,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
         m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
+        m_Player_LoadLevel1 = m_Player.FindAction("LoadLevel1", throwIfNotFound: true);
+        m_Player_LoadLevel2 = m_Player.FindAction("LoadLevel2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -257,6 +299,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Save;
     private readonly InputAction m_Player_Load;
+    private readonly InputAction m_Player_LoadLevel1;
+    private readonly InputAction m_Player_LoadLevel2;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -266,6 +310,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Save => m_Wrapper.m_Player_Save;
         public InputAction @Load => m_Wrapper.m_Player_Load;
+        public InputAction @LoadLevel1 => m_Wrapper.m_Player_LoadLevel1;
+        public InputAction @LoadLevel2 => m_Wrapper.m_Player_LoadLevel2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -290,6 +336,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Load.started += instance.OnLoad;
             @Load.performed += instance.OnLoad;
             @Load.canceled += instance.OnLoad;
+            @LoadLevel1.started += instance.OnLoadLevel1;
+            @LoadLevel1.performed += instance.OnLoadLevel1;
+            @LoadLevel1.canceled += instance.OnLoadLevel1;
+            @LoadLevel2.started += instance.OnLoadLevel2;
+            @LoadLevel2.performed += instance.OnLoadLevel2;
+            @LoadLevel2.canceled += instance.OnLoadLevel2;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -309,6 +361,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Load.started -= instance.OnLoad;
             @Load.performed -= instance.OnLoad;
             @Load.canceled -= instance.OnLoad;
+            @LoadLevel1.started -= instance.OnLoadLevel1;
+            @LoadLevel1.performed -= instance.OnLoadLevel1;
+            @LoadLevel1.canceled -= instance.OnLoadLevel1;
+            @LoadLevel2.started -= instance.OnLoadLevel2;
+            @LoadLevel2.performed -= instance.OnLoadLevel2;
+            @LoadLevel2.canceled -= instance.OnLoadLevel2;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -342,5 +400,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
+        void OnLoadLevel1(InputAction.CallbackContext context);
+        void OnLoadLevel2(InputAction.CallbackContext context);
     }
 }

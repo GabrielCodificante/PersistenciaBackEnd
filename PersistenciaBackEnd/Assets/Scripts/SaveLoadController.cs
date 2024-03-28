@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Networking;
 
 public class SaveLoadController : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class SaveLoadController : MonoBehaviour
     public CharacterMovement player;
 
     public GameObject block, coin;
+    private int coinsLength;
     private string path;
-    public string pathName;
+    [SerializeField] private string url; 
 
+    public int GetCoinsLength{
+        get=>coinsLength;
+    }
     #endregion
 
     #region Methods
@@ -59,9 +64,8 @@ public class SaveLoadController : MonoBehaviour
 
         json = File.ReadAllText(path);
         sceneData = JsonUtility.FromJson<SceneData>(json);
-
-  
-        List<Coin> coins = new List<Coin>();
+        coinsLength= sceneData.coins.Length;
+        PlayerManager.instance.coinsTxt.text = string.Format("{0} / {1}",0,SaveLoadController.instance.GetCoinsLength);
 
         foreach(BlockData block in sceneData.blocks)
         {
@@ -70,11 +74,37 @@ public class SaveLoadController : MonoBehaviour
 
         foreach(CoinData coin in sceneData.coins)
         {
-            //Instantiate(this.coin,coin.position,Quaternion.identity);
             AdapterData.CreateCoin(this.coin,coin);
         }
 
         AdapterData.GetPlayer(sceneData.player, ref player);
+        
+
+    }
+
+    public void GenerateWebScene(UnityWebRequest web)
+    {   
+            string json;
+            SceneData sceneData= new SceneData();
+
+            Clear();
+
+            json = web.downloadHandler.text;
+            sceneData = JsonUtility.FromJson<SceneData>(json);
+            coinsLength= sceneData.coins.Length;
+            PlayerManager.instance.coinsTxt.text = string.Format("{0} / {1}",0,SaveLoadController.instance.GetCoinsLength);
+
+            foreach(BlockData block in sceneData.blocks)
+            {
+                AdapterData.CreateBlock(this.block,block);
+            }
+
+            foreach(CoinData coin in sceneData.coins)
+            {
+                AdapterData.CreateCoin(this.coin,coin);
+            }
+
+            AdapterData.GetPlayer(sceneData.player, ref player);
         
 
     }
@@ -97,6 +127,18 @@ public class SaveLoadController : MonoBehaviour
 
     #endregion
 
+    #region Coroutines
+
+    public IEnumerator OnlineLoad(int num){
+        UnityWebRequest webRequest = UnityWebRequest.Get(url + "nivel" + num.ToString() + ".json");
+        yield return webRequest.SendWebRequest();
+
+        if(webRequest.result == UnityWebRequest.Result.Success)
+        {
+           GenerateWebScene(webRequest);
+        }
+    }
+    #endregion
     void Start()
     {
         if(instance != null){
@@ -108,7 +150,7 @@ public class SaveLoadController : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         } 
 
-        path = Application.persistentDataPath + "_" + pathName + ".json";
+        path = Application.persistentDataPath + "_" + "nivel.json";
     }
 
 

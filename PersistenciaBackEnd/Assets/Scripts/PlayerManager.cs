@@ -6,7 +6,7 @@ using System;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
-    [SerializeField] Text coinsTxt;
+    [SerializeField] public Text coinsTxt;
     [SerializeField] private int coins; 
 
 
@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
         set 
         {
             coins = value;
-            coinsTxt.text = string.Format("{0} / {1}",coins,coins); //coins.ToString() + " | 15";
+            coinsTxt.text = string.Format("{0} / {1}",coins,SaveLoadController.instance.GetCoinsLength);
         } 
     }
 
@@ -35,6 +35,5 @@ public class PlayerManager : MonoBehaviour
         if(instance == null){
             instance = this;
         }
-        coinsTxt.text = string.Format("{0} / {1}",coins,coins);
     }
 }

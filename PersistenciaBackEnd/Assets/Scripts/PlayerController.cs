@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 cameraLook;
    
     private PlayerInputActions inputs;
-    private InputAction move, jump, look, load, save; 
+    private InputAction move, jump, look, load, save, level1, level2; 
 
     public static PlayerController instance;
 
@@ -30,6 +30,18 @@ public class PlayerController : MonoBehaviour
         PlayerManager.instance.LoadPrefs();
      }
 
+     void OnlineLoad(InputAction.CallbackContext call)
+     {
+        if(call.action == level1){
+            StartCoroutine(SaveLoadController.instance.OnlineLoad(1));
+            Debug.Log(call);
+        }
+        else if(call.action == level2){
+            StartCoroutine(SaveLoadController.instance.OnlineLoad(2));
+            Debug.Log(call);
+        }
+     }
+
     void OnEnable()
     {
         inputs.Enable();
@@ -37,6 +49,8 @@ public class PlayerController : MonoBehaviour
         jump.performed += characterMovement.Jump;
         load.performed += Load;
         save.performed += Save;
+        level1.performed += OnlineLoad;
+        level2.performed += OnlineLoad;
     }
 
     void OnDisable()
@@ -53,6 +67,8 @@ public class PlayerController : MonoBehaviour
         look = inputs.Player.Look;
         load = inputs.Player.Load;
         save = inputs.Player.Save;
+        level1 = inputs.Player.LoadLevel1;
+        level2 = inputs.Player.LoadLevel2;
     }
 
     void Start(){
