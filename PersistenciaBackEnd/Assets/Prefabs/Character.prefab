@@ -335,12 +335,12 @@ MonoBehaviour:
   orientation: {fileID: 0}
   rg: {fileID: 0}
   raio: 0.1
-  maxSpeed: 5
+  maxSpeed: 10
   acceleration: 40
   rotationSpeed: 6.5
   gravity: 20
-  jumpHeight: 1
-  airMaxSpeed: 4
+  jumpHeight: 3
+  airMaxSpeed: 8
   airAcceleration: 15
   drag: 0.4
 --- !u!1 &7178277154837622724

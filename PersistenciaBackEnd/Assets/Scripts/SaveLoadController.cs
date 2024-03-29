@@ -65,7 +65,7 @@ public class SaveLoadController : MonoBehaviour
         json = File.ReadAllText(path);
         sceneData = JsonUtility.FromJson<SceneData>(json);
         coinsLength= sceneData.coins.Length;
-        PlayerManager.instance.coinsTxt.text = string.Format("{0} / {1}",0,SaveLoadController.instance.GetCoinsLength);
+        PlayerManager.instance.Coins=0;
 
         foreach(BlockData block in sceneData.blocks)
         {
@@ -92,7 +92,7 @@ public class SaveLoadController : MonoBehaviour
             json = web.downloadHandler.text;
             sceneData = JsonUtility.FromJson<SceneData>(json);
             coinsLength= sceneData.coins.Length;
-            PlayerManager.instance.coinsTxt.text = string.Format("{0} / {1}",0,SaveLoadController.instance.GetCoinsLength);
+            PlayerManager.instance.Coins=0;
 
             foreach(BlockData block in sceneData.blocks)
             {
