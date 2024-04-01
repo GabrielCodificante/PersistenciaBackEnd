@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1851922828041242832, guid: 454bd2457be28374abcf804fa8fa4ae3, type: 3}
-  block: {fileID: 3683492574925957895, guid: ae5def172dcd2cd4ba90d570925550df, type: 3}
-  coin: {fileID: 2041604525784196761, guid: 6fdbcda02e3aa104799c4965a1534ea3, type: 3}
+  block: {fileID: 3514445132128964668, guid: b18a743450d168143bef4c4096cd84b9, type: 3}
+  coin: {fileID: 6654804679642221693, guid: bb06ddbbafaf18f45afa955221c2359e, type: 3}
   url: https://projetobackendunity.000webhostapp.com/

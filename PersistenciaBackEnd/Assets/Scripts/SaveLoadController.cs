@@ -65,7 +65,7 @@ public class SaveLoadController : MonoBehaviour
         json = File.ReadAllText(path);
         sceneData = JsonUtility.FromJson<SceneData>(json);
         coinsLength= sceneData.coins.Length;
-        PlayerManager.instance.Coins=0;
+        PlayerManager.instance.LoadPrefs();
 
         foreach(BlockData block in sceneData.blocks)
         {

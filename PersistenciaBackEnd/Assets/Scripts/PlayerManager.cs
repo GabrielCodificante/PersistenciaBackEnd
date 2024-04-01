@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     public void LoadPrefs()
     {
         coins = PlayerPrefs.GetInt("coins");
+         coinsTxt.text = string.Format("{0} / {1}",coins,SaveLoadController.instance.GetCoinsLength);
     }
 
     public void SavePrefs()
