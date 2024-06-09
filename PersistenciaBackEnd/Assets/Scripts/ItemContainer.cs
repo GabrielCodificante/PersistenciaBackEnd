@@ -18,7 +18,7 @@ public class ItemContainer : MonoBehaviour
         productPrice.text = string.Format("C$ {0}", price);
         productStock.text = string.Format("N. em estoque: {0}", stock);
         imageLink = link;
-        StartCoroutine("LoadImage");
+        
     }
 
     public void BuyButton(){
@@ -42,12 +42,16 @@ public class ItemContainer : MonoBehaviour
         }
     }
 
+    private void UpdateImage(){
+        StartCoroutine("LoadImage");
+    }
+
     /*private void UpdateImage(){
         IEnumerator upImg = NetworkController.LoadImage(imageLink, productImg.sprite);
         StartCoroutine(upImg);
     }*/
 
-    void Start(){
-       
+    void OnEnable(){
+       UpdateImage();
     }
 }
