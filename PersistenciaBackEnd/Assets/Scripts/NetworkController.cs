@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class NetworkController
@@ -83,4 +85,21 @@ public class NetworkController
             GameManager.instance.Credits = int.Parse(i);
         }
     }
+
+    public static IEnumerator Buy(int playerID,int itemID){
+        WWWForm form= new WWWForm();
+        form.AddField("player_id",playerID);
+        form.AddField("item_id",itemID);
+        UnityWebRequest request = UnityWebRequest.Post("https://projetobackendunity.000webhostapp.com/loja_projeto/buy.php/",form);
+        yield return request.SendWebRequest();
+
+        //Debug
+        if(request.result != UnityWebRequest.Result.Success){
+            Debug.Log(request.error);
+        }else{
+            Debug.Log("Compra feita");
+            NetworkManager.instance.UpdateCredits();
+        }
+    }
+
 }

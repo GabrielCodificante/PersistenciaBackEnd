@@ -38,6 +38,11 @@ public class NetworkManager : MonoBehaviour
         StartCoroutine(setCredits);
     }
 
+    public void Buy(int itemID){
+        IEnumerator buyItem = NetworkController.Buy(GameManager.instance.UserID, itemID);
+        StartCoroutine(buyItem);
+    }
+
     public void AddCredits(){
         IEnumerator setCredits = NetworkController.GetCredits(UIController.instance.CardCredits, GameManager.instance.UserID);
         StartCoroutine(setCredits);
