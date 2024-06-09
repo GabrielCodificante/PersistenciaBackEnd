@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
     [Header("UserInfo")]
     [SerializeField] private Text userName;
     [SerializeField] private Text userCredits;
+    [SerializeField] private InputField cardCredits;
 
     public GameObject GetLoginPanel{
         get => loginPanel;
@@ -34,6 +35,10 @@ public class UIController : MonoBehaviour
 
     public string UserCredits{
         set => userCredits.text = value;
+    }
+
+    public int CardCredits{
+        get => int.Parse(cardCredits.text);
     }
     
     void Awake(){

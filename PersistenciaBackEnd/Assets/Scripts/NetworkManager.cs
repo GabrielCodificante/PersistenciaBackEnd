@@ -33,8 +33,13 @@ public class NetworkManager : MonoBehaviour
         StartCoroutine(setName);
     }
 
-    public void UpdateCredits(int c){
-        IEnumerator setCredits = NetworkController.GetCredits(c, GameManager.instance.UserID);
+    public void UpdateCredits(){
+        IEnumerator setCredits = NetworkController.GetCredits(0, GameManager.instance.UserID);
+        StartCoroutine(setCredits);
+    }
+
+    public void AddCredits(){
+        IEnumerator setCredits = NetworkController.GetCredits(UIController.instance.CardCredits, GameManager.instance.UserID);
         StartCoroutine(setCredits);
     }
 

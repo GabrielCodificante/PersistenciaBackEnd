@@ -6,11 +6,11 @@ using UnityEngine.Networking;
 
 public class ItemLoadController : MonoBehaviour
 {
-    GameObject lojaPanel;
-    ItemContainer prefab;
+    [SerializeField] private GameObject lojaPanel;
+    [SerializeField] private ItemContainer prefab;
 
     public IEnumerator LoadItem(){
-        string url = "site";
+        string url = "https://projetobackendunity.000webhostapp.com/loja_projeto/carditem_api.php/";
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
 
@@ -19,6 +19,7 @@ public class ItemLoadController : MonoBehaviour
         }else{
             string json = request.downloadHandler.text;
             ItemData itemData = JsonUtility.FromJson<ItemData>(json);
+            Debug.Log(itemData.status);
             foreach(Item item in itemData.data){
                 ItemContainer itemContainer = Instantiate<ItemContainer> (prefab, transform.position, Quaternion.identity, lojaPanel.transform);
             }
@@ -36,8 +37,12 @@ public class ItemLoadController : MonoBehaviour
     {
         public int id;
         public string name;
-        public string price;
-        public string score;
+        public int price;
+        public int score;
+    }
+
+    void Star(){
+        StartCoroutine("LoadItem");
     }
 }
 

@@ -12,6 +12,6 @@ public class ItemContainer : MonoBehaviour
         //productImg.sprite = ima;
         productName.text = name;
         productPrice.text = string.Format("C$ {0}", price);
-        productStock.text = string.Format("C$ {0}", stock);
+        productStock.text = string.Format("N. em estoque: {0}", stock);
     }
 }

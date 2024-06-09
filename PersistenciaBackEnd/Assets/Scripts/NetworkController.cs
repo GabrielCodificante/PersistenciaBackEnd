@@ -40,7 +40,7 @@ public class NetworkController
                 Debug.Log("Bem vindo!");
                 GameManager.instance.UserID = int.Parse(request.downloadHandler.text);
                 NetworkManager.instance.PegarNome();
-                NetworkManager.instance.UpdateCredits(0);
+                NetworkManager.instance.UpdateCredits();
                 yield return new WaitForSeconds(1);
                 UIController.instance.GetLoginPanel.SetActive(false);
                 UIController.instance.GetStorePanel.SetActive(true);
@@ -77,9 +77,10 @@ public class NetworkController
         if(request.result != UnityWebRequest.Result.Success){
             Debug.Log(request.error);
         }else{
-            //string i = request.downloadHandler.text;
+            string i = request.downloadHandler.text;
+            Debug.Log(i);
             //Debug.Log("CREDITS " + i);
-            GameManager.instance.Credits = int.Parse(request.downloadHandler.text);
+            GameManager.instance.Credits = int.Parse(i);
         }
     }
 }
