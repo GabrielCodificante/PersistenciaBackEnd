@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -46,7 +45,7 @@ public class NetworkController
                 yield return new WaitForSeconds(1);
                 UIController.instance.GetLoginPanel.SetActive(false);
                 UIController.instance.GetStorePanel.SetActive(true);
-                
+                DealLoadController.instance.CreateTable();
             }            
             Debug.Log(request.downloadHandler.text);
         }
@@ -98,8 +97,15 @@ public class NetworkController
             Debug.Log(request.error);
         }else{
             Debug.Log("Compra feita");
-            NetworkManager.instance.UpdateCredits();
+            Debug.Log(request.downloadHandler.text);
+            if(int.Parse(request.downloadHandler.text) > 0){
+                NetworkManager.instance.UpdateCredits();
+                UIController.instance.GetFeedbackPanel.SetActive(true);
+                DealLoadController.instance.CreateTable();
+            }else{
+                UIController.instance.GetFailPanel.SetActive(true);
+            }
+            
         }
     }
-
 }

@@ -11,6 +11,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject loginPanel;
     [SerializeField] private GameObject registerPanel;
     [SerializeField] private GameObject storePanel;
+    [SerializeField] private GameObject feedbackPanel;
+    [SerializeField] private GameObject failPanel;
 
     [Header("UserInfo")]
     [SerializeField] private Text userName;
@@ -27,6 +29,14 @@ public class UIController : MonoBehaviour
 
     public GameObject GetStorePanel{
         get => storePanel;
+    }
+
+    public GameObject GetFeedbackPanel{
+        get => feedbackPanel;
+    }
+
+    public GameObject GetFailPanel{
+        get => failPanel;
     }
 
     public string UserName{

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemContainer : MonoBehaviour
 {
-    [SerializeField] private int productID;
+    public int productID;
     [SerializeField] private Image productImg;
     [SerializeField] private Text productName;
     [SerializeField] private Text productPrice;
@@ -17,17 +17,20 @@ public class ItemContainer : MonoBehaviour
         productName.text = name;
         productPrice.text = string.Format("C$ {0}", price);
         productStock.text = string.Format("N. em estoque: {0}", stock);
-        imageLink = link;
-        
+        imageLink = link;        
+    }
+
+    public void SetStock(int stock){
+        productStock.text = string.Format("N. em estoque: {0}", stock);     
     }
 
     public void BuyButton(){
         NetworkManager.instance.Buy(productID);
+        ItemLoadController.instance.LoadContainer(this);
     }
 
     public IEnumerator LoadImage()
-    {
-      
+    {      
         UnityWebRequest requestTexture = UnityWebRequestTexture.GetTexture(imageLink);
         yield return requestTexture.SendWebRequest();
 
@@ -42,14 +45,11 @@ public class ItemContainer : MonoBehaviour
         }
     }
 
+    
+
     private void UpdateImage(){
         StartCoroutine("LoadImage");
     }
-
-    /*private void UpdateImage(){
-        IEnumerator upImg = NetworkController.LoadImage(imageLink, productImg.sprite);
-        StartCoroutine(upImg);
-    }*/
 
     void OnEnable(){
        UpdateImage();

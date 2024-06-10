@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int userID;
     [SerializeField] private string userName;
     [SerializeField] private int credits;
+    [SerializeField] private int dealID;
 
     public int UserID{
         get => userID;
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
             credits = value;
             UIController.instance.UserCredits = Convert.ToString(credits);
         } 
+    }
+
+      public int DealID{
+        get => dealID;
+        set => dealID = value;
     }
 
     void Awake(){

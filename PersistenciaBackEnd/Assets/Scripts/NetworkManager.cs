@@ -24,8 +24,7 @@ public class NetworkManager : MonoBehaviour
 
     public void Logar(){
         IEnumerator login = NetworkController.Login(txtEmail_L.text, txtPassword_L.text);
-        StartCoroutine(login);
-        
+        StartCoroutine(login);        
     }
 
     public void PegarNome(){
